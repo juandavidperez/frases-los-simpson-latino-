@@ -49,6 +49,16 @@ function getData(personaje, valor1, valor2) {
         const imagenURL = quote.imagen;
         imagenHTML.src = imagenURL;
 
+        // agrega el video
+        const videoContainer = document.createElement("iframe");
+        videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
+        videoContainer.width = 560;
+        videoContainer.height = 315;
+        videoContainer.title="YouTube video player"
+        videoContainer.frameBorder="0"
+        videoContainer.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        videoContainer.allowfullscreen = true;
+
         const linea = document.createElement("hr");
 
         // agrega todo del quote al contenedor
@@ -56,6 +66,7 @@ function getData(personaje, valor1, valor2) {
         contenido.append(personajeHTML);
         contenido.append(fraseHTML);
         contenido.append(imagenHTML);
+        contenido.append(videoContainer);
         contenido.append(linea);
 
         contenedor.append(contenido);
