@@ -35,10 +35,12 @@ function getData(personaje, valor1, valor2) {
         // agrega el nombre del personaje
         const personajeHTML = document.createElement("p");
         const personaje = quote.character;
+        personajeHTML.className = "autor";
         personajeHTML.textContent = personaje;
         // agrega la frase
         const fraseHTML = document.createElement("p");
         const frase = quote.quote;
+        fraseHTML.className = "frasesita";
         fraseHTML.textContent = frase;
         // agrega la imagen
         const imagenHTML = document.createElement("img");
@@ -90,10 +92,12 @@ function getRandom() {
         // agrega el nombre del personaje
         const personajeHTML = document.createElement("p");
         const personaje = quote.character;
+        personajeHTML.className = "autor";
         personajeHTML.textContent = personaje;
         // agrega la frase
         const fraseHTML = document.createElement("p");
         const frase = quote.quote;
+        fraseHTML.className = "frasesita";
         fraseHTML.textContent = frase;
         // agrega la imagen
         const imagenHTML = document.createElement("img");

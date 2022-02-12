@@ -117,6 +117,15 @@ iframe {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
 }
+.autor {
+  font-family: "Architects Daughter";
+  font-weight: 800;
+  font-size: 5vw;
+  color: #0e0e0e;
+}
+.frasesita {
+  font-size: 4vw;
+}
 
 @media (min-width: 800px) {
   .imagen > img {
