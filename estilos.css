@@ -4,12 +4,11 @@ html {
 body {
   margin: 0;
   background: url(https://lumiere-a.akamaihd.net/v1/images/thesimpsons_yellowfaces_zoom_ec07dd0a.jpeg);
-  font-family: cursive;
   font-size: large;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  font-family: cursive;
+  font-family: cursive, patrick hand, kalam;
 }
 
 .input {
