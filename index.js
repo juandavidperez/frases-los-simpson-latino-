@@ -13,15 +13,8 @@ random.addEventListener("click", Randomizar);
 
 function setContainerStyles() {
   const app = document.getElementById("app");
-  console.log("PONIENDO ESTILOS");
-  app.style.position = "relative";
-  app.style.left = "2%";
-  app.style.width = "96%";
-  app.style.borderStyle = "solid";
-  app.style.borderColor = "black";
-  app.style.borderWidth = "2%";
-  app.style.borderRadius = "15px";
-  app.style.textAlign = "center";
+  
+  app.className = "resultados"
 }
 
 function getData(personaje, valor1, valor2) {

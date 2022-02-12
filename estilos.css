@@ -98,15 +98,24 @@ iframe {
   border: none;
   aspect-ratio: 16/10;
 }
-#app {
-  width: 100%;
-}
 .imagenes {
   width: 95%;
 }
 .videos {
   width: 98%;
   height: auto;
+}
+
+.resultados {
+  position: relative;
+  left: calc(2% - 2px);
+  width: 96%;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  border-radius: 15px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 @media (min-width: 800px) {
