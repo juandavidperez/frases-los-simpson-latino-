@@ -8,7 +8,7 @@ body {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  font-family: cursive, "Patrick Hand", "Kalam";
+  font-family: "Patrick Hand", "Kalam", cursive;
 }
 
 .input {
