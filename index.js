@@ -14,11 +14,14 @@ random.addEventListener("click", Randomizar);
 function setContainerStyles() {
   const app = document.getElementById("app");
   console.log("PONIENDO ESTILOS");
+  app.style.position = "relative";
+  app.style.left = "2%";
+  app.style.width = "96%";
   app.style.borderStyle = "solid";
   app.style.borderColor = "black";
-  app.style.borderWidth = "5px";
-  app.style.textAlign = "center";
+  app.style.borderWidth = "2%";
   app.style.borderRadius = "15px";
+  app.style.textAlign = "center";
 }
 
 function getData(personaje, valor1, valor2) {
@@ -47,25 +50,25 @@ function getData(personaje, valor1, valor2) {
         // agrega la imagen
         const imagenHTML = document.createElement("img");
         const imagenURL = quote.imagen;
+        imagenHTML.className = "imagenes";
         imagenHTML.src = imagenURL;
-
+        //agrega un salto de linea
+        const br = document.createElement("br");
         // agrega el video
         const videoContainer = document.createElement("iframe");
         videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
-        videoContainer.width = 560;
-        videoContainer.height = 315;
+        videoContainer.className = "videos";
         videoContainer.title="YouTube video player"
         videoContainer.frameBorder="0"
         videoContainer.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         videoContainer.allowfullscreen = true;
-
+        //agrega la linea
         const linea = document.createElement("hr");
-
         // agrega todo del quote al contenedor
-
         contenido.append(personajeHTML);
         contenido.append(fraseHTML);
         contenido.append(imagenHTML);
+        contenido.append(br)
         contenido.append(videoContainer);
         contenido.append(linea);
 
@@ -102,13 +105,24 @@ function getRandom() {
         // agrega la imagen
         const imagenHTML = document.createElement("img");
         const imagenURL = quote.imagen;
+        imagenHTML.className = "imagenes";
         imagenHTML.src = imagenURL;
-
+        //agrega un salto de linea
+        const br = document.createElement("br");
+        // agrega el video
+        const videoContainer = document.createElement("iframe");
+        videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
+        videoContainer.className = "videos";
+        videoContainer.title="YouTube video player"
+        videoContainer.frameBorder="0"
+        videoContainer.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        videoContainer.allowfullscreen = true;
         // agrega todo del quote al contenedor
-
         contenido.append(personajeHTML);
         contenido.append(fraseHTML);
         contenido.append(imagenHTML);
+        contenido.append(br);
+        contenido.append(videoContainer);
 
         contenedor.append(contenido);
       });
