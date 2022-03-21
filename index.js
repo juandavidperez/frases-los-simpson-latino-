@@ -5,17 +5,21 @@ let data;
 const botoncito = document.getElementById("boton");
 const select = document.getElementById("seleccionar");
 const random = document.getElementById("aleatorio");
+const copy = document.getElementById("copiar");
 
 const contenedor = document.getElementById("app");
 
 botoncito.addEventListener("click", buscarPersonaje);
 random.addEventListener("click", Randomizar);
+copy.addEventListener("click",copyUrl)
 
 function setContainerStyles() {
   const app = document.getElementById("app");
   
   app.className = "resultados"
 }
+
+var content;
 
 function getData(personaje, valor1, valor2) {
   contenedor.innerHTML = "<div></div>";
@@ -68,6 +72,8 @@ function getData(personaje, valor1, valor2) {
         contenido.append(linea);
 
         contenedor.append(contenido);
+
+        content = `https://frases-simpsons.herokuapp.com/${valor1}?${valor2}=${personaje}`;
       });
     })
     .then(() => {
@@ -122,6 +128,7 @@ function getRandom() {
         contenido.append(videoContainer);
 
         contenedor.append(contenido);
+        content = `https://frases-simpsons.herokuapp.com/${valor1}?${valor2}=${personaje}`;
       });
     })
     .then(() => {
@@ -146,6 +153,17 @@ function buscarPersonaje() {
     var valor2 = "quote";
   }
   return getData(buscar.value, valor1, valor2);
+}
+
+function copyUrl() {
+  
+  navigator.clipboard.writeText(content)
+        .then(() => {
+        alert("Text copied to clipboard...")
+    })
+        .catch(err => {
+        alert('Something went wrong', err);
+    })
 }
 
 function Randomizar() {

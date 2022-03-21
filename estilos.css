@@ -106,6 +106,19 @@ iframe {
   height: auto;
 }
 
+#copiar {
+  text-align: center;
+  width: 100px;
+  height: 35px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.19), 0 5px 6px rgba(0, 0, 0, 0.23);
+  background-color: aliceblue;
+  background: linear-gradient(90deg, #0e0e0e, #242424, #393939);
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: indie flower;
+  color: #ffe800;
+}
+
 .resultados {
   position: relative;
   left: calc(2% - 2px);
