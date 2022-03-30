@@ -151,6 +151,7 @@ iframe {
   .contenido {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .autor {
     width: 100%;
