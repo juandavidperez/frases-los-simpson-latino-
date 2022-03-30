@@ -28,19 +28,23 @@ function getData(personaje, valor1, valor2) {
   )
     .then((respuesta) => respuesta.json())
     .then((res) => {
-      // {character
-      // imagen
-      // quote
-      // video}
 
       const contenido = document.createElement("div");
+      contenido.className = "contenido";
+
+      // agrega el nombre del personaje
+      const personajeHTML = document.createElement("p");
+      const personaje = res[0].character;
+      personajeHTML.className = "autor";
+      personajeHTML.textContent = personaje;
+
+      contenido.prepend(personajeHTML);
+
       data = res;
       data.map((quote) => {
-        // agrega el nombre del personaje
-        const personajeHTML = document.createElement("p");
-        const personaje = quote.character;
-        personajeHTML.className = "autor";
-        personajeHTML.textContent = personaje;
+        const tarjeta = document.createElement("div");
+        tarjeta.className = "tarjeta";
+        
         // agrega la frase
         const fraseHTML = document.createElement("p");
         const frase = quote.quote;
@@ -64,12 +68,13 @@ function getData(personaje, valor1, valor2) {
         //agrega la linea
         const linea = document.createElement("hr");
         // agrega todo del quote al contenedor
-        contenido.append(personajeHTML);
-        contenido.append(fraseHTML);
-        contenido.append(imagenHTML);
-        contenido.append(br)
-        contenido.append(videoContainer);
-        contenido.append(linea);
+        tarjeta.append(fraseHTML);
+        tarjeta.append(imagenHTML);
+        tarjeta.append(br)
+        tarjeta.append(videoContainer);
+        tarjeta.append(linea);
+
+        contenido.append(tarjeta);
 
         contenedor.append(contenido);
 
