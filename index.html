@@ -16,14 +16,14 @@
     <div class="imagen"><img src="https://www.themoviedb.org/t/p/original/hKuiXx5eNObCLKe9BOl7O7ulKyg.png"></div>
     <br>
     <p>
-    <div class="input">
+    <form class="input" onsubmit="buscarPersonaje()">
     <select name="select" required id="seleccionar">
         <option value="Character">Personaje</option>
         <option value="Quote">Frase</option>
     </select>
     <input type="text" id="texto" value="">
-    <input type="button" value="Buscar" id="boton">
-    </div>
+    <input type="submit" value="Buscar" id="boton">
+</form>
     <div class="BotonR">
     <input type="button" value="Random" id="aleatorio"><br>
     <input type="button" value="Copiar URL" id="copiar";></div>

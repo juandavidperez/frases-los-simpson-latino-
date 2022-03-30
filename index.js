@@ -139,7 +139,8 @@ function getRandom() {
 var valor1 = "character";
 var valor2 = "name";
 
-function buscarPersonaje() {
+function buscarPersonaje(event) {
+  event.preventDefault();
   console.log("BUSCANDO");
   const buscar = document.getElementById("texto");
 
