@@ -11,24 +11,23 @@ const contenedor = document.getElementById("app");
 
 botoncito.addEventListener("click", buscarPersonaje);
 random.addEventListener("click", Randomizar);
-copy.addEventListener("click",copyUrl)
+copy.addEventListener("click", copyUrl);
 
 function setContainerStyles() {
   const app = document.getElementById("app");
-  
-  app.className = "resultados"
+
+  app.className = "resultados";
 }
 
 var content;
 
 function getData(personaje, valor1, valor2) {
-  contenedor.innerHTML = "<div></div>";
+  contenedor.innerHTML = "<div><p>CARGANDO...</p></div>";
   return fetch(
-    `https://frases-simpsons.herokuapp.com/${valor1}?${valor2}=${personaje}`
+    `https://frases-simpsons-latino.herokuapp.com/${valor1}?${valor2}=${personaje}`
   )
     .then((respuesta) => respuesta.json())
     .then((res) => {
-
       const contenido = document.createElement("div");
       contenido.className = "contenido";
 
@@ -44,7 +43,7 @@ function getData(personaje, valor1, valor2) {
       data.map((quote) => {
         const tarjeta = document.createElement("div");
         tarjeta.className = "tarjeta";
-        
+
         // agrega la frase
         const fraseHTML = document.createElement("p");
         const frase = quote.quote;
@@ -61,24 +60,26 @@ function getData(personaje, valor1, valor2) {
         const videoContainer = document.createElement("iframe");
         videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
         videoContainer.className = "videos";
-        videoContainer.title="YouTube video player"
-        videoContainer.frameBorder="0"
-        videoContainer.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        videoContainer.title = "YouTube video player";
+        videoContainer.frameBorder = "0";
+        videoContainer.allow =
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         videoContainer.allowfullscreen = true;
         //agrega la linea
         const linea = document.createElement("hr");
         // agrega todo del quote al contenedor
         tarjeta.append(fraseHTML);
         tarjeta.append(imagenHTML);
-        tarjeta.append(br)
+        tarjeta.append(br);
         tarjeta.append(videoContainer);
         tarjeta.append(linea);
 
         contenido.append(tarjeta);
 
+        contenedor.innerHTML = "";
         contenedor.append(contenido);
 
-        content = `https://frases-simpsons.herokuapp.com/${valor1}?${valor2}=${personaje}`;
+        content = `https://frases-simpsons-latino.herokuapp.com/${valor1}?${valor2}=${personaje}`;
       });
     })
     .then(() => {
@@ -91,8 +92,8 @@ function between(min, max) {
 }
 
 function getRandom() {
-  contenedor.innerHTML = "<div></div>";
-  return fetch(`https://frases-simpsons.herokuapp.com/quote?quote=`)
+  contenedor.innerHTML = "<div><p>CARGANDO...</p></div>";
+  return fetch(`https://frases-simpsons-latino.herokuapp.com/quote?quote=`)
     .then((respuesta) => respuesta.json())
     .then((res) => {
       const randomNumber = between(0, res.length - 1);
@@ -121,9 +122,10 @@ function getRandom() {
         const videoContainer = document.createElement("iframe");
         videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
         videoContainer.className = "videos";
-        videoContainer.title="YouTube video player"
-        videoContainer.frameBorder="0"
-        videoContainer.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        videoContainer.title = "YouTube video player";
+        videoContainer.frameBorder = "0";
+        videoContainer.allow =
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         videoContainer.allowfullscreen = true;
         // agrega todo del quote al contenedor
         contenido.append(personajeHTML);
@@ -131,9 +133,9 @@ function getRandom() {
         contenido.append(imagenHTML);
         contenido.append(br);
         contenido.append(videoContainer);
-
+        contenedor.innerHTML = "";
         contenedor.append(contenido);
-        content = `https://frases-simpsons.herokuapp.com/${valor1}?${valor2}=${personaje}`;
+        content = `https://frases-simpsons-latino.herokuapp.com/${valor1}?${valor2}=${personaje}`;
       });
     })
     .then(() => {
@@ -162,14 +164,14 @@ function buscarPersonaje(event) {
 }
 
 function copyUrl() {
-  
-  navigator.clipboard.writeText(content)
-        .then(() => {
-        alert("Text copied to clipboard...")
+  navigator.clipboard
+    .writeText(content)
+    .then(() => {
+      alert("Text copied to clipboard...");
     })
-        .catch(err => {
-        alert('Something went wrong', err);
-    })
+    .catch((err) => {
+      alert("Something went wrong", err);
+    });
 }
 
 function Randomizar() {
