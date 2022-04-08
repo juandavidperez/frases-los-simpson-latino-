@@ -78,6 +78,7 @@ body {
   font-size: 18px;
   font-family: indie flower;
   color: #ffe800;
+  cursor: pointer;
 }
 #aleatorio:hover {
   background: #ffe800;
