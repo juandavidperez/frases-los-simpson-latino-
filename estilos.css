@@ -109,6 +109,7 @@ iframe {
 }
 
 .copiar {
+  margin-top: 1em;
   text-align: center;
   width: 100px;
   height: 35px;
@@ -141,6 +142,24 @@ iframe {
 }
 .frasesita {
   font-size: 4vw;
+  flex: 1;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 1em;
+  margin: 1em;
+  flex: 1;
+  padding: 2em;
+}
+
+.mensaje-resultado {
+  padding: 1em;
+  font-size: 2em;
 }
 
 @media (min-width: 800px) {
@@ -159,8 +178,17 @@ iframe {
     width: 100%;
   }
   .tarjeta {
+    box-sizing: border-box;
     min-width: 35%;
-    max-width: 40%;
+    max-width: 680px;
     padding: 0 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 1em;
+    margin: 0.5em;
+    flex: 1;
   }
 }

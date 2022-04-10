@@ -97,7 +97,7 @@ function getData(personaje, valor1, valor2) {
         });
       } else {
         contenedor.innerHTML =
-          "<div>No encontramos resultados para tu búsqueda, pero puedes probar una diferente!</div>";
+          "<div class='mensaje-resultado'>No encontramos resultados para tu búsqueda, pero puedes probar una diferente!</div><br/><div class='mensaje-resultado'>¿Que tal si buscas Homero Simpson?</div>";
       }
     })
     .then(() => {
@@ -117,11 +117,16 @@ function getRandom() {
       const randomNumber = between(0, res.length - 1);
 
       const contenido = document.createElement("div");
+      contenido.className = "contenido";
       data = [res[randomNumber]];
       data.map((quote) => {
         const tarjeta = crearTarjeta(quote);
         contenido.append(tarjeta);
         contenedor.innerHTML = "<div></div>";
+        const nombre = document.createElement("p");
+        nombre.className = "autor";
+        nombre.innerHTML = quote.character;
+        contenedor.append(nombre);
         contenedor.append(contenido);
       });
     })
