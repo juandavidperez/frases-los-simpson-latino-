@@ -11,15 +11,50 @@ const contenedor = document.getElementById("app");
 
 botoncito.addEventListener("click", buscarPersonaje);
 random.addEventListener("click", Randomizar);
-copy.addEventListener("click", copyUrl);
 
 function setContainerStyles() {
   const app = document.getElementById("app");
 
-  app.className = "resultados";
+  app.className = "resultados"
 }
 
 var content;
+
+function crearTarjeta(quote) {
+  const tarjeta = document.createElement("div");
+  tarjeta.className = "tarjeta";
+
+  // agrega la frase
+  const fraseHTML = document.createElement("p");
+  const frase = quote.quote;
+  fraseHTML.className = "frasesita";
+  fraseHTML.textContent = frase;
+  // agrega la imagen
+  const imagenHTML = document.createElement("img");
+  const imagenURL = quote.imagen;
+  imagenHTML.className = "imagenes";
+  imagenHTML.src = imagenURL;
+  //agrega un salto de linea
+  const br = document.createElement("br");
+  // agrega el video
+  const videoContainer = document.createElement("iframe");
+  videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
+  videoContainer.className = "videos";
+  videoContainer.title = "YouTube video player"
+  videoContainer.frameBorder = "0"
+  videoContainer.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  videoContainer.allowfullscreen = true;
+  //agrega la linea
+  const linea = document.createElement("hr");
+  // agrega todo del quote al contenedor
+  tarjeta.append(fraseHTML);
+  tarjeta.append(imagenHTML);
+  tarjeta.append(br)
+  tarjeta.append(videoContainer);
+  tarjeta.append(linea);
+
+  return tarjeta
+}
 
 function getData(personaje, valor1, valor2) {
   contenedor.innerHTML = "<div><p>CARGANDO...</p></div>";
@@ -30,57 +65,28 @@ function getData(personaje, valor1, valor2) {
     .then((res) => {
       const contenido = document.createElement("div");
       contenido.className = "contenido";
+      if (res && res.length > 0) {
+        console.log({res})
+        // agrega el nombre del personaje
+        const personajeHTML = document.createElement("p");
+        const personaje = res[0].character;
+        personajeHTML.className = "autor";
+        personajeHTML.textContent = personaje;
 
-      // agrega el nombre del personaje
-      const personajeHTML = document.createElement("p");
-      const personaje = res[0].character;
-      personajeHTML.className = "autor";
-      personajeHTML.textContent = personaje;
+        contenido.prepend(personajeHTML);
 
-      contenido.prepend(personajeHTML);
+        res.map((quote) => {
+          const tarjeta = crearTarjeta(quote)
 
-      data = res;
-      data.map((quote) => {
-        const tarjeta = document.createElement("div");
-        tarjeta.className = "tarjeta";
+          contenido.append(tarjeta);
 
-        // agrega la frase
-        const fraseHTML = document.createElement("p");
-        const frase = quote.quote;
-        fraseHTML.className = "frasesita";
-        fraseHTML.textContent = frase;
-        // agrega la imagen
-        const imagenHTML = document.createElement("img");
-        const imagenURL = quote.imagen;
-        imagenHTML.className = "imagenes";
-        imagenHTML.src = imagenURL;
-        //agrega un salto de linea
-        const br = document.createElement("br");
-        // agrega el video
-        const videoContainer = document.createElement("iframe");
-        videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
-        videoContainer.className = "videos";
-        videoContainer.title = "YouTube video player";
-        videoContainer.frameBorder = "0";
-        videoContainer.allow =
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        videoContainer.allowfullscreen = true;
-        //agrega la linea
-        const linea = document.createElement("hr");
-        // agrega todo del quote al contenedor
-        tarjeta.append(fraseHTML);
-        tarjeta.append(imagenHTML);
-        tarjeta.append(br);
-        tarjeta.append(videoContainer);
-        tarjeta.append(linea);
+          contenedor.append(contenido);
 
-        contenido.append(tarjeta);
-
-        contenedor.innerHTML = "";
-        contenedor.append(contenido);
-
-        content = `https://frases-simpsons-latino.herokuapp.com/${valor1}?${valor2}=${personaje}`;
-      });
+          content = `https://frases-simpsons.herokuapp.com/${valor1}?${valor2}=${personaje}`;
+        });
+      } else {
+        contenedor.innerHTML = "<div>No encontramos resultados para tu búsqueda, pero puedes probar una diferente!</div>";
+      }
     })
     .then(() => {
       setContainerStyles();
@@ -97,45 +103,14 @@ function getRandom() {
     .then((respuesta) => respuesta.json())
     .then((res) => {
       const randomNumber = between(0, res.length - 1);
-      console.log({ randomNumber });
+
       const contenido = document.createElement("div");
       data = [res[randomNumber]];
       data.map((quote) => {
-        // agrega el nombre del personaje
-        const personajeHTML = document.createElement("p");
-        const personaje = quote.character;
-        personajeHTML.className = "autor";
-        personajeHTML.textContent = personaje;
-        // agrega la frase
-        const fraseHTML = document.createElement("p");
-        const frase = quote.quote;
-        fraseHTML.className = "frasesita";
-        fraseHTML.textContent = frase;
-        // agrega la imagen
-        const imagenHTML = document.createElement("img");
-        const imagenURL = quote.imagen;
-        imagenHTML.className = "imagenes";
-        imagenHTML.src = imagenURL;
-        //agrega un salto de linea
-        const br = document.createElement("br");
-        // agrega el video
-        const videoContainer = document.createElement("iframe");
-        videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
-        videoContainer.className = "videos";
-        videoContainer.title = "YouTube video player";
-        videoContainer.frameBorder = "0";
-        videoContainer.allow =
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        videoContainer.allowfullscreen = true;
-        // agrega todo del quote al contenedor
-        contenido.append(personajeHTML);
-        contenido.append(fraseHTML);
-        contenido.append(imagenHTML);
-        contenido.append(br);
-        contenido.append(videoContainer);
-        contenedor.innerHTML = "";
+        const tarjeta = crearTarjeta(quote);
+        contenido.append(tarjeta);
+        contenedor.innerHTML = "<div></div>";
         contenedor.append(contenido);
-        content = `https://frases-simpsons-latino.herokuapp.com/${valor1}?${valor2}=${personaje}`;
       });
     })
     .then(() => {
@@ -161,17 +136,6 @@ function buscarPersonaje(event) {
     var valor2 = "quote";
   }
   return getData(buscar.value, valor1, valor2);
-}
-
-function copyUrl() {
-  navigator.clipboard
-    .writeText(content)
-    .then(() => {
-      alert("Text copied to clipboard...");
-    })
-    .catch((err) => {
-      alert("Something went wrong", err);
-    });
 }
 
 function Randomizar() {
