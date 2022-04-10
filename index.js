@@ -14,8 +14,7 @@ random.addEventListener("click", Randomizar);
 
 function setContainerStyles() {
   const app = document.getElementById("app");
-
-  app.className = "resultados"
+  app.className = "resultados";
 }
 
 var content;
@@ -36,24 +35,36 @@ function crearTarjeta(quote) {
   imagenHTML.src = imagenURL;
   //agrega un salto de linea
   const br = document.createElement("br");
+
+  const button = document.createElement("button");
+  button.innerHTML = "compartir";
+  button.className = "copiar";
+  button.value = `${quote.id}`;
+  button.onclick = () =>
+    navigator.clipboard
+      .writeText(`https://frases-los-simpson-latino.vercel.app/?id=${quote.id}`)
+      .then(() => console.log("copiado al portapapeles"))
+      .catch((error) => console.log(error));
   // agrega el video
   const videoContainer = document.createElement("iframe");
   videoContainer.src = `https://www.youtube.com/embed/${quote.video}`;
   videoContainer.className = "videos";
-  videoContainer.title = "YouTube video player"
-  videoContainer.frameBorder = "0"
-  videoContainer.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  videoContainer.title = "YouTube video player";
+  videoContainer.frameBorder = "0";
+  videoContainer.allow =
+    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
   videoContainer.allowfullscreen = true;
   //agrega la linea
   const linea = document.createElement("hr");
   // agrega todo del quote al contenedor
   tarjeta.append(fraseHTML);
   tarjeta.append(imagenHTML);
-  tarjeta.append(br)
+  tarjeta.append(br);
   tarjeta.append(videoContainer);
+  tarjeta.append(button);
   tarjeta.append(linea);
 
-  return tarjeta
+  return tarjeta;
 }
 
 function getData(personaje, valor1, valor2) {
@@ -66,7 +77,7 @@ function getData(personaje, valor1, valor2) {
       const contenido = document.createElement("div");
       contenido.className = "contenido";
       if (res && res.length > 0) {
-        console.log({res})
+        console.log({ res });
         // agrega el nombre del personaje
         const personajeHTML = document.createElement("p");
         const personaje = res[0].character;
@@ -76,16 +87,17 @@ function getData(personaje, valor1, valor2) {
         contenido.prepend(personajeHTML);
 
         res.map((quote) => {
-          const tarjeta = crearTarjeta(quote)
+          const tarjeta = crearTarjeta(quote);
 
           contenido.append(tarjeta);
-
+          contenedor.innerHTML = "<div></div>";
           contenedor.append(contenido);
 
           content = `https://frases-simpsons.herokuapp.com/${valor1}?${valor2}=${personaje}`;
         });
       } else {
-        contenedor.innerHTML = "<div>No encontramos resultados para tu búsqueda, pero puedes probar una diferente!</div>";
+        contenedor.innerHTML =
+          "<div>No encontramos resultados para tu búsqueda, pero puedes probar una diferente!</div>";
       }
     })
     .then(() => {
@@ -141,5 +153,25 @@ function buscarPersonaje(event) {
 function Randomizar() {
   return getRandom();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const queryparams = window.location.search;
+  const params = new URLSearchParams(queryparams);
+  const personaje = params.get("character");
+  const frase = params.get("quote");
+  const id = params.get("id");
+
+  if (personaje) {
+    getData(personaje, "character", "name");
+  }
+  if (frase) {
+    getData(frase, "quote", "quote");
+  }
+  if (id) {
+    getData(id, "id", "id");
+  }
+
+  console.log("pagina cargo", { personaje });
+});
 
 console.log("carga");

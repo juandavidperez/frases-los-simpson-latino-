@@ -108,7 +108,7 @@ iframe {
   height: auto;
 }
 
-#copiar {
+.copiar {
   text-align: center;
   width: 100px;
   height: 35px;
@@ -119,6 +119,7 @@ iframe {
   font-size: 18px;
   font-family: indie flower;
   color: #ffe800;
+  cursor: pointer;
 }
 
 .resultados {
